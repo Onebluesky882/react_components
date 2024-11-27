@@ -1,22 +1,18 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import InfoContainer from "./components/InfoContainer";
-import InputContainer from "./components/InputContainer";
-import useUser from "./hooks/useUser";
+import HomePage from "./pages/HomePage";
+import CallUserApi from "./pages/CallUserApi";
+import Layout from "./components/Layout";
 function App() {
-  const { user, loadUser, loading, setUserId, userId } = useUser();
-  console.log("user:", user);
   return (
-    <div className="App">
-      <h1>User Dashboard</h1>
-      <InputContainer
-        style={{}}
-        loadUser={loadUser}
-        loading={loading}
-        setUserId={setUserId}
-        userId={userId}
-      />
-      <InfoContainer loading={loading} user={user} />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/user-api" element={<CallUserApi />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 export default App;
